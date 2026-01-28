@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Categories - Wapa Plants</title>
+		<link rel="shortcut icon" href="images/fav.png" type="image/x-icon">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+	
+<style>
+    /* --- RESET & LAYOUT --- */
+    .inner { width: 90%; max-width: 1200px; margin: 0 auto; }
+    
+    /* --- KARTU KATEGORI (FIXED) --- */
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2em;
+        padding: 2em 0;
+    }
+
+    .category-card {
+        position: relative;
+        height: 450px; /* Tinggi proporsional */
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        background: #eee; /* Warna cadangan jika gambar gagal load */
+    }
+
+    /* Gambar Latar Belakang */
+    .category-image {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        object-fit: cover;
+        z-index: 1;
+        transition: transform 0.5s ease;
+    }
+
+    .category-card:hover .category-image {
+        transform: scale(1.1);
+    }
+
+    /* Overlay Teks (Putih di bagian bawah) */
+    .category-overlay {
+        position: relative;
+        z-index: 2;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1.5em;
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .category-overlay h3 {
+        color: #000 !important;
+        font-weight: 900;
+        margin-bottom: 5px;
+        font-size: 1.2em !important;
+        letter-spacing: 1px;
+    }
+
+    .category-overlay p {
+        color: #444 !important;
+        font-size: 0.9em !important;
+        line-height: 1.4;
+        margin: 0;
+    }
+
+    /* --- TABEL & DARK MODE --- */
+    body.dark-mode { background: #121212 !important; color: #fff !important; }
+    body.dark-mode .category-overlay { background: #fff !important; } /* Tetap putih agar teks hitam terbaca */
+    
+    .dark-mode-toggle {
+        position: fixed; bottom: 20px; right: 20px;
+        width: 50px; height: 50px; background: #f2849e;
+        color: #fff; border-radius: 50%; display: flex;
+        align-items: center; justify-content: center;
+        cursor: pointer; z-index: 999;
+    }
+</style>
+	</head>
+	<body class="is-preload category-body">
+		<div id="wrapper">
+
+				<header id="header">
+						<div class="inner">
+							<a href="index.html" class="logo">
+								<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">WAPA PLANTS</span>
+							</a>
+							<nav>
+								<ul>
+									<li><a href="#menu">Menu</a></li>
+								</ul>
+							</nav>
+						</div>
+					</header>
+
+				<nav id="menu">
+			<h2>Menu</h2>
+			<ul>
+			 <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="kategori.html">Plant Category</a></li>
+				<li><a href="kontak.html">Contact us</a></li>
+				<li><a href="https://bitri.link/wapadiumeubud">Hotels Information</a></li>
+			</ul>
+		</nav>
+
+				<div id="main">
+						<div class="inner">
+							<div class="category-header">
+								<h1>Botanical Collections</h1>
+								<p>Jelajahi keanekaragaman tanaman di Wapa Di Ume berdasarkan kegunaannya.</p>
+							</div>
+
+							<div class="category-grid">
+								<div class="category-card reveal">
+									<img src="images/medi.png" class="category-image" alt="Medicinal">
+									<div class="category-overlay">
+										<span class="category-icon">🌿</span>
+										<h3>Medicinal</h3>
+										<p>Tanaman herbal untuk kesehatan dan ritual wellness di Spa.</p>
+									</div>
+								</div>
+
+								<div class="category-card reveal">
+									<img src="images/edible-pice.png" class="category-image" alt="Edible">
+									<div class="category-overlay">
+										<span class="category-icon">🍴</span>
+										<h3>Edible & Spice</h3>
+										<p>Bumbu dapur dan buah-buahan organik untuk hidangan restoran.</p>
+									</div>
+								</div>
+
+								<div class="category-card reveal">
+									<img src="images/ceremonial.png" class="category-image" alt="Ceremonial">
+									<div class="category-overlay">
+										<span class="category-icon">🌸</span>
+										<h3>Ceremonial</h3>
+										<p>Bunga-bunga sakral yang digunakan dalam persembahan harian.</p>
+									</div>
+								</div>
+
+								<div class="category-card reveal">
+									<img src="images/ornamental.png" class="category-image" alt="Ornamental">
+									<div class="category-overlay">
+										<span class="category-icon">🍃</span>
+										<h3>Ornamental</h3>
+										<p>Tanaman hias yang menambah estetika di setiap sudut resort.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<section>
+					<h2>Hubungi Kami</h2>
+					<form method="post" action="#">
+						<div class="fields">
+							<div class="field half">
+								<input type="text" name="name" id="name" placeholder="Name" />
+							</div>
+							<div class="field half">
+								<input type="email" name="email" id="email" placeholder="Email" />
+							</div>
+							<div class="field">
+								<textarea name="message" id="message" placeholder="Message"></textarea>
+							</div>
+						</div>
+						<ul class="actions">
+							<li><input type="submit" value="Send" class="primary" /></li>
+						</ul>
+					</form>
+				</section>
+				<section>
+					<h2>Ikuti Kami </h2>
+					<ul class="icons">
+						<li><a href="https://x.com/wapadiumeresort" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li><a href="https://web.facebook.com/wapadiumeubud" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li><a href="https://www.instagram.com/wapadiumeubud/" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li><a href="https://www.youtube.com/channel/UCwpbF3GIwdgp5LKjFyeAGQQ" class="icon brands style2 fa-youtube"><span class="label">Youtube</span></a>
+						</li>
+						<li><a href="https://api.whatsapp.com/send/?phone=628113998971&text&type=phone_number&app_absent=0" class="icon brands style2 fa-whatsapp"><span class="label">whatsapp</span></a>
+						</li>
+						
+						 <li>
+            <a href="https://www.tripadvisor.com/Hotel_Review-g297701-d309331-Reviews-Wapa_Di_Ume_Ubud-Ubud_Gianyar_Regency_Bali.html" class="icon brands style2">
+              <img src="images/boboboy.png"  style="width: 32px; height: auto; filter: grayscale(100%) brightness(0.5);">
+              <span class="label"></span>
+            </a>
+          </li>
+						<li><a href="tel:+62%20366%20543%207600" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
+						<li><a href="mailto:reservation@wapadiume.com " class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+				</section>
+
+		<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script>
+				// Script khusus animasi kartu kategori
+				const revealCards = () => {
+					const cards = document.querySelectorAll('.category-card');
+					cards.forEach((card, index) => {
+						setTimeout(() => {
+							card.classList.add('show');
+						}, index * 200); // Muncul berurutan (stagger)
+					});
+				}
+				window.onload = revealCards;
+			</script>
+	</body>
+</html>

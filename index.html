@@ -1,0 +1,1190 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	 <title>Wapa Plants</title>
+    <link rel="shortcut icon" href="images/fav.png" type="image/x-icon">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+
+
+
+
+<style>
+
+    
+    /* --- TOMBOL TOGGLE (BULAN/MATAHARI) --- */
+    .dark-mode-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background-color: #f2849e; /* Warna Pink */
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10001;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        transition: transform 0.3s ease;
+    }
+
+    .dark-mode-toggle:hover {
+        transform: scale(1.1);
+    }
+
+    /* --- PENGATURAN MODE GELAP --- */
+    
+    /* 1. Latar Belakang Utama */
+    body.dark-mode {
+        background-color: #1a1a1a !important;
+        color: #ffffff !important;
+    }
+
+    /* 2. Mengubah semua Section & Container menjadi Gelap */
+    body.dark-mode #main, 
+    body.dark-mode #footer, 
+    body.dark-mode .inner,
+    body.dark-mode #header,
+    body.dark-mode section {
+        background-color: #1a1a1a !important;
+        color: #ffffff !important;
+    }
+
+    /* 3. Judul (H1, H2, H3) menjadi Putih */
+    body.dark-mode h1, 
+    body.dark-mode h2, 
+    body.dark-mode h3,
+    body.dark-mode h4 {
+        color: #ffffff !important;
+    }
+
+    /* 4. AREA PENTING: TABEL, FAQ, & FORM (Tetap Putih agar Teks Hitam Terlihat) */
+    body.dark-mode table, 
+    body.dark-mode .faq-item, 
+    body.dark-mode .contact-form-card,
+    body.dark-mode .info-box,
+    body.dark-mode .table-wrapper {
+        background-color: #ffffff !important; /* Latar tetap putih */
+        border: 1px solid #444 !important;
+    }
+
+    /* 5. MEMAKSA TEKS DI DALAM TABEL & FAQ TETAP HITAM */
+    body.dark-mode table td, 
+    body.dark-mode table th,
+    body.dark-mode .faq-question,
+    body.dark-mode .faq-answer p,
+    body.dark-mode .contact-form-card h3,
+    body.dark-mode .info-box h4,
+    body.dark-mode .info-box p {
+        color: #000000 !important; /* Teks Hitam Pekat */
+    }
+
+    /* Khusus Header Tabel tetap Pink agar cantik */
+    body.dark-mode table th {
+        background-color: #f2849e !important;
+        color: #ffffff !important;
+    }
+
+    /* 6. Navigasi Menu Hamburger saat Mode Gelap */
+    body.dark-mode #menu {
+        background-color: #2d2d2d !important;
+    }
+    
+    body.dark-mode #menu ul li a {
+        color: #ffffff !important;
+    }
+
+
+/* Kondisi awal: tidak terlihat dan agak turun */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+/* Kondisi saat elemen terlihat: muncul dan naik ke posisi asli */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+    .tiles article img {
+        transition: transform .5s ease;
+    }
+    .tiles article:hover img {
+        transform: scale(1.1);
+    }
+    .btn-service {
+        transition: all 0.3s ease;
+        background-color: #585858;
+    }
+    .btn-service:hover {
+        background-color: #f2849e; /* Warna berubah saat hover */
+        transform: translateY(-3px);
+    }
+
+	/* Memberikan jeda waktu muncul pada elemen reveal yang berjejer */
+.reveal:nth-child(1) { transition-delay: 0.1s; }
+.reveal:nth-child(2) { transition-delay: 0.3s; }
+.reveal:nth-child(3) { transition-delay: 0.5s; }
+.reveal:nth-child(4) { transition-delay: 0.7s; }
+</style>
+
+
+
+<style>
+	/* Kondisi awal: tidak terlihat dan agak turun */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+/* Kondisi saat elemen terlihat: muncul dan naik ke posisi asli */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+    /* Desain Kotak Kartu */
+    .feature-card {
+        background: #ffffff;
+        padding: 2.5em;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Bayangan lembut */
+        transition: all 0.4s ease; /* Transisi untuk animasi */
+        height: 100%;
+        border: 1px solid #eee;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Efek Animasi saat Disentuh (Hover) */
+    .feature-card:hover {
+        transform: translateY(-10px); /* Melayang ke atas */
+        box-shadow: 0 15px 45px rgba(0,0,0,0.1);
+        border-color: #f2849e; /* Warna berubah tipis di pinggir */
+    }
+
+    /* Menambahkan garis warna di atas kartu */
+    .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: #f2849e; /* Warna aksen pink khas template Phantom */
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .feature-card:hover::before {
+        opacity: 1;
+    }
+
+    /* Styling Icon Emoji */
+    .feature-icon {
+        font-size: 2.5em;
+        display: block;
+        margin-bottom: 0.5em;
+    }
+
+    /* Penyesuaian judul di dalam kartu */
+    .feature-card h3 {
+        margin-top: 0.5em;
+        color: #585858;
+    }
+
+	.table-wrapper {
+    overflow-x: auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2em 0;
+    background: #fff;
+}
+table th {
+    background-color: #f2849e; /* Warna pink khas template */
+    color: white;
+    padding: 1em;
+    text-align: left;
+}
+table td {
+    padding: 1em;
+    border-bottom: 1px solid #eee;
+}
+table tr:hover {
+    background-color: #f9f9f9;
+}
+</style>
+<style>
+    .faq-section {
+        margin: 4em 0;
+        padding-bottom: 2em;
+    }
+
+    .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .faq-item {
+        background: #ffffff;
+        border: 1px solid #eee;
+        border-radius: 10px;
+        margin-bottom: 1em;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .faq-question {
+        padding: 1.5em;
+        font-weight: 900;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #585858;
+        background: #fff;
+    }
+
+    .faq-question:hover {
+        background: #f9f9f9;
+        color: #f2849e; /* Warna pink saat hover */
+    }
+
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+        background: #fdfdfd;
+        padding: 0 1.5em;
+    }
+
+    .faq-item.active .faq-answer {
+        max-height: 200px; /* Sesuaikan dengan panjang teks */
+        padding: 1.5em;
+        border-top: 1px solid #eee;
+    }
+
+    /* Putar ikon panah saat aktif */
+    .faq-item.active .faq-question::after {
+        transform: rotate(180deg);
+    }
+
+    .faq-question::after {
+        content: '▼';
+        font-size: 0.8em;
+        transition: transform 0.3s ease;
+    }
+	/* Ikon Pencarian di Header */
+#header .search-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    color: #585858;
+}
+
+#header .search-trigger:hover {
+    color: #f2849e;
+}
+
+/* Modal Pencarian (Pop-up yang muncul saat ikon diklik) */
+.search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 10000;
+    display: none; /* Sembunyi secara default */
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.search-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.search-overlay input {
+    width: 80%;
+    max-width: 600px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #585858;
+    font-size: 2em;
+    padding: 0.5em;
+    text-align: center;
+    outline: none;
+}
+
+.close-search {
+    position: absolute;
+    top: 2em;
+    right: 2em;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+</style>
+
+<style>
+    /* Perbaikan Kontras Teks di Mode Gelap */
+body.is-dark-mode #main h2, 
+body.is-dark-mode #main h1 {
+    color: #ffffff !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+body.is-dark-mode .content-description {
+    color: #cccccc !important;
+}
+
+/* Memperbaiki Kotak Putih yang Kosong di Screenshot */
+.use-case-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 2.5em;
+    text-align: center;
+    transition: transform 0.3s ease;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+body.is-dark-mode .use-case-card {
+    background: rgba(255, 255, 255, 0.05); /* Transparan gelap di mode malam */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.use-case-card h3 {
+    margin-top: 1em;
+    color: #585858;
+}
+
+body.is-dark-mode .use-case-card h3 {
+    color: #ffffff;
+}
+</style>
+<style>
+    /* Pastikan teks di dalam kotak putih selalu terlihat */
+.use-case-card h3, 
+.use-case-card p {
+    color: #333333 !important; /* Warna gelap agar kontras dengan kotak putih */
+    opacity: 1 !important;
+    transition: color 0.3s ease;
+}
+
+/* Jika Anda ingin kotak kartu ikut berubah saat Mode Gelap */
+body.is-dark-mode .use-case-card {
+    background: #2c2c2c !important; /* Background kartu jadi abu-abu sangat gelap */
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+body.is-dark-mode .use-case-card h3 {
+    color: #f2849e !important; /* Judul kartu jadi pink saat gelap */
+}
+
+body.is-dark-mode .use-case-card p {
+    color: #eeeeee !important; /* Teks penjelasan jadi putih keabuan */
+}
+
+/* Perbaikan untuk teks judul utama yang hilang di screenshot */
+body.is-dark-mode h2, 
+body.is-dark-mode header p {
+    color: #ffffff !important;
+}
+
+</style>
+
+
+</head>
+
+
+
+<body class="is-preload">
+    <div class="dark-mode-toggle" id="darkModeBtn">
+    <i class="icon solid fa-moon"></i>
+</div>
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<header id="header">
+    <div class="inner">
+        <a href="index.html" class="logo">
+            <span class="symbol"><img src="images/logoubud.png" alt="" /></span>
+        </a>
+
+        <nav style="display: flex; align-items: center;">
+            <ul>
+                <li style="list-style: none;">
+                    <a href="javascript:void(0)" class="search-trigger icon solid fa-search"></a>
+                </li>
+                <li><a href="#menu">Menu</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="search-overlay" id="searchOverlay">
+    <span class="close-search icon solid fa-times" id="closeSearch"></span>
+    <input type="text" id="headerSearchInput" placeholder="Ketik nama tanaman...">
+</div>
+		</header>
+
+		<!-- Menu -->
+		<nav id="menu">
+			<h2>Menu</h2>
+			<ul>
+			 <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="kategori.html">Plant Category</a></li>
+				<li><a href="kontak.html">Contact us</a></li>
+				<li><a href="https://bitri.link/wapadiumeubud">Hotels Information</a></li>
+			</ul>
+		</nav>
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner reveal">
+				<header>
+					<h1>Wapa Plants</h1>
+					<!-- <p>
+						There are some following tour selections available for you to pick that may match your time
+						schedule.
+						Otherwise, a tailor-made trip can also be arranged, as our guest assistant is ready to fulfill
+						your preferable interests.
+						Please note: all the entrance tickets will be paid by the guest.
+					</p>-->
+					<div class="col-btn">
+						<!-- Tombol -->
+						<!-- <button class="btn-service" onclick="showPopup()">
+							ADDITIONAL SERVICES
+						</button> -->
+						<button class="btn-service"
+							onclick="window.location.href='https://bitri.link/wapadiumeubud'">
+							 INFORMASI HOTEL
+						</button>
+
+						<!-- Popup Gambar -->
+						<div id="popup" class="popup">
+							<div class="popup-content">
+								<span class="close" onclick="closePopup()">&times;</span>
+								<img src="images/service.png" alt="Service Info" style="max-width:100%;">
+							</div>
+						</div>
+						<div class="line"></div>
+					</div>
+				</header>
+
+				<section style="margin-bottom: 4em;">
+    <div class="row reveal">
+        <div class="col-8 col-12-medium">
+            <h2>The Green Soul of Wapa Di Ume</h2>
+            <p>Di Wapa Di Ume Ubud, tanaman bukan sekadar penghias. Mereka adalah bagian dari ekosistem yang memberikan ketenangan, oksigen segar, dan bahan alami untuk perawatan kesehatan Anda. Dari kebun ke meja makan (Farm-to-Table) hingga ritual harian kami.</p>
+            <p>Telusuri koleksi botani kami dan temukan keajaiban alam yang tumbuh di setiap sudut resort kami.</p>
+        </div>
+        <div class="col-4 col-12-medium">
+            <span class="image main"><img src="images/Lemongrass.jpg" alt="Suasana Hijau Hotel" style="border-radius: 8px;" /></span>
+        </div>
+    </div>
+</section>
+<hr />
+
+<section class="reveal" style="margin-bottom: 2em;">
+    <div class="inner">
+        <div style="position: relative; max-width: 600px; margin: 0 auto;">
+            <input type="text" id="searchPlant" placeholder="Cari nama tanaman (contoh: Aloe Vera)..." 
+                style="border-radius: 30px; padding-left: 3em; border: 2px solid #eee;" />
+            <span class="icon solid fa-search" style="position: absolute; left: 1.2em; top: 1em; color: #ccc;"></span>
+        </div>
+    </div>
+</section>
+
+<section id="featured-plant" style="background: #f4f4f4; padding: 2em; border-radius: 10px; margin-bottom: 3em; display: flex; align-items: center; gap: 20px;">
+    <div style="flex: 1;">
+        <img src="images/Marigold.jpg" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    </div>
+    <div style="flex: 2;">
+        <h3>Plant of the Month: Marigold (Gemitir)</h3>
+        <p>Di Bali, Bunga Gemitir (Marigold) sangat penting untuk upacara keagamaan. Klik untuk informasi manfaatnya</p>
+        <a href="Marigold.html" class="button primary small">Lebih Lanjut</a>
+    </div>
+</section>
+
+<section class="reveal" style="margin: 4em 0;">
+    <div class="inner">
+        <h2 style="text-align: center;">Tangan-Tangan di Balik Kehijauan</h2>
+        <div class="row">
+            <div class="col-4 col-12-small" style="text-align: center;">
+                <span class="image fit"><img src="images/paktut.png" alt="Bapak Ketut" style="border-radius: 50%; width: 150px; height: 150px; object-fit: cover; margin: 0 auto;" /></span>
+                <h3>Pak Ketut</h3>
+                <p><i>Head Gardener (Kepala Tukang Kebun)</i><br>Ahli tanaman obat Bali yang telah merawat kebun Wapa selama 10 tahun.</p>
+            </div>
+            <div class="col-4 col-12-small" style="text-align: center;">
+                <span class="image fit"><img src="images/pakyan.png" alt="Bapak Wayan" style="border-radius: 50%; width: 150px; height: 150px; object-fit: cover; margin: 0 auto;" /></span>
+                <h3>Pak Wayan</h3>
+                <p><i>Orchid Specialist (Spesialis Anggrek)</i><br>Spesialis anggrek dan tanaman hias yang memastikan lobi selalu cantik.</p>
+            </div>
+            <div class="col-4 col-12-small" style="text-align: center;">
+                <span class="image fit"><img src="images/paklolek.png" alt="Bapak Made" style="border-radius: 50%; width: 150px; height: 150px; object-fit: cover; margin: 0 auto;" /></span>
+                <h3>Pak Made</h3>
+                <p><i>Organic Expert (Ahli organik)</i><br>Penanggung jawab pengolahan pupuk kompos dari limbah organik hotel.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section style="padding: 3em 0; text-align: center;">
+    <div class="row">
+        <div class="col-4 col-12-small">
+            <h1 style="font-size: 3em; color: #f2849e;">17+</h1>
+            <p>Spesies Tanaman</p>
+        </div>
+        <div class="col-4 col-12-small">
+            <h1 style="font-size: 3em; color: #7ecaf6;">100%</h1>
+            <p>Organik & Alami</p>
+        </div>
+        <div class="col-4 col-12-small">
+            <h1 style="font-size: 3em; color: #7bd0c1;">15</h1>
+            <p>Tanaman Obat (Ayurvedic)</p>
+        </div>
+    </div>
+</section>
+<hr />
+
+<section style="margin: 4em 0; background: #313131; color: white; padding: 3em; border-radius: 15px; text-align: center;">
+    <h2>Digital Garden Map</h2>
+    <p>Sedang dalam pengembangan: Fitur peta interaktif untuk melacak posisi tanaman di area resort.</p>
+    <a href="#" class="button icon solid fa-map-marked-alt">Lihat Denah Hotel</a>
+</section>
+
+<section class="reveal" style="margin: 4em 0; position: relative; overflow: hidden; border-radius: 20px; color: white;">
+    <div style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/Banyan.jpg'); background-size: cover; background-position: center; padding: 6em 3em; text-align: center;">
+        <h4 style="color: #f2849e; text-transform: uppercase; letter-spacing: 2px;">Highlight</h4>
+        <h2 style="color: white; font-size: 2.5em;">The Majestic Banyan Tree</h2>
+        <p style="max-width: 700px; margin: 0 auto 2em;">Pohon Beringin di area bawah resort kami bukan hanya sekadar pohon, tapi merupakan jantung spiritual Wapa Di Ume yang memberikan energi positif dan keteduhan bagi seluruh tamu.</p>
+        <a href="#footer" class="button primary">Hubungi Kami untuk Garden Tour</a>
+    </div>
+</section>
+
+<section class="reveal" style="margin: 4em 0;">
+    <div class="inner">
+        <h2>Perkembangan Lingkungan Kami</h2>
+        <div style="margin-bottom: 2em;">
+            <label>Penggunaan Pupuk Organik (100%)</label>
+            <div style="background: #eee; border-radius: 10px; height: 10px;">
+                <div style="background: #7bd0c1; width: 100%; height: 100%; border-radius: 10px;"></div>
+            </div>
+        </div>
+        <div style="margin-bottom: 2em;">
+            <label>Daur Ulang Air Siram (85%)</label>
+            <div style="background: #eee; border-radius: 10px; height: 10px;">
+                <div style="background: #7ecaf6; width: 85%; height: 100%; border-radius: 10px;"></div>
+            </div>
+        </div>
+        <div style="margin-bottom: 2em;">
+            <label>Tanaman Endemik Bali (70%)</label>
+            <div style="background: #eee; border-radius: 10px; height: 10px;">
+                <div style="background: #f2849e; width: 70%; height: 100%; border-radius: 10px;"></div>
+            </div>
+        </div>
+    </div>
+</section>
+			
+				<section class="tiles">
+					<article class="style1 reveal">
+						<span class="image">
+							<img src="images/AloeVera.jpg" alt="" />
+						</span>
+						<a href="Aloe-Vera.html">
+							<h2>Lidah buaya
+							</h2>
+							<div class="content">
+								<p><strong>Nama Ilmiah: </strong> Aloe Barbadensis Miller
+								<strong>Ayurvedic:</strong> Kumari <br>
+								<strong>Bagian:</strong> Daun (gel and latex)</p>
+							</div> 
+						</a>
+					</article>
+					<article class="style2 reveal">
+						<span class="image">
+							<img src="images/ButterflyPea.jpg" alt="" />
+						</span>
+						<a href="Butterfly-Pea.html">
+							<h2>Kembang Telang
+							</h2>
+							<div class="content">
+								<p><strong>Nama Ilmiah: </strong> Clitoria Ternatea <br>
+								<strong>Ayurvedic: </strong> Shankhpushpi <br>
+								<strong>Bagian: </strong>Bunga, Daun</p>
+							</div> 
+						</a>
+					</article>
+					<article class="style3 reveal">
+						<span class="image">
+							<img src="images/Frangipani.jpg" alt="" />
+						</span>
+						<a href="Frangipani.html">
+							<h2>Jepun</h2>
+							<div class="content">
+								<p><strong>Nama Ilmiah: </strong>Plumeria <br>
+								<strong>Ayurvedic: </strong>Champa <br>
+								<strong>Bagian: </strong>Bunga, Batang, Daun</p>
+							</div> 
+						</a>
+					</article>
+					<article class="style4 reveal">
+						<span class="image">
+							<img src="images/Ginger.jpg" alt="" />
+						</span>
+						<a href="Ginger.html">
+							<h2>Jahe</h2>
+								<div class="content">
+								<p><strong>Nama Ilmiah: </strong>Zingiber Officinale<br>
+								<strong>Ayurvedic: </strong>Ardraka <br>
+								<strong>Bagian: </strong>Rhizome (root)</p>
+							</div> 
+						</a>
+					</article>
+					<article class="style5 reveal">
+						<span class="image">
+							<img src="images/guava.jpg" alt="" />
+						</span>
+						<a href="Guava.html">
+							<h2>Jambu biji</h2>
+							<div class="content">
+								<p><strong>Nama Ilmiah: </strong>Psidium Guajava L<br>
+								<strong>Ayurvedic: </strong>Peruka <br>
+								<strong>Bagian: </strong>Daun, Buah, Batang</p>
+							</div> 
+						</a>
+					</article>
+					<article class="style6 reveal">
+						<span class="image">
+							<img src="images/Hibiscus.jpg" alt="" />
+						</span>
+						<a href="Hibiscus.html">
+							<h2>Kembang Sepatu</h2>
+							<div class="content">
+								<p><strong>Nama Ilmiah: </strong>Hibiscus rosa-sinensis L<br>
+								<strong>Ayurvedic: </strong>Japa Pushpa <br>
+								<strong>Bagian: </strong>Bunga, Daun</p>
+							</div> 
+						</a>
+					</article>
+					<article class="style2 reveal">
+						<span class="image">
+							<img src="images/Jackfruit.jpg" alt="" />
+						</span>
+						<a href="Jackfruit.html">
+							<h2>Nangka</h2>
+							<div class="content">
+								<p><strong>Nama Ilmiah: </strong>Artocarpus Heterophyllus<br>
+								<strong>Ayurvedic: </strong>Panasa <br>
+								<strong>Bagian: </strong>Buah, Daun, Biji</p>
+							</div> 
+						</a>
+					</article>
+					<article class="style3 reveal">
+						<span class="image">
+							<img src="images/Jempiring.jpg" alt="" />
+						</span>
+						<a href="Jempiring.html">
+							<h2>Jempiring</h2>
+							<div class="content">
+								<p><strong>Nama Ilmiah: </strong>Gardenia Jasminoides<br>
+								<strong>Ayurvedic: </strong>Gandharaja<br>
+								<strong>Bagian: </strong>Bunga, Daun</p>
+							</div> 
+						</a>
+					</article>
+					<article class="style1 reveal">
+						<span class="image">
+							<img src="images/Lemongrass.jpg" alt="" />
+						</span>
+						<a href="Lemongrass.html">
+							<h2>Serai</h2>
+							<div class="content">
+								<p><strong>Nama Ilmiah: </strong>Cymbopogon Citrarus<br>
+								<strong>Ayurvedic: </strong>Bhutrinah, Atigandha<br>
+								<strong>Bagian: </strong>Daun, Batang</p>
+							</div> 
+						</a>
+					</article>
+					<article class="style5 reveal">
+						<span class="image">
+							<img src="images/Lime.jpg" alt="" />
+						</span>
+						<a href="Lime.html">
+							<h2>Jeruk nipis</h2>
+											<div class="content">
+								<p><strong>Nama Ilmiah: </strong>Citrus Aurantifolia<br>
+								<strong>Ayurvedic: </strong>Nimbu/Jambira<br>
+								<strong>Bagian: </strong>Buah (Peel and Juice), Daun</p>
+							</div> 												
+						</a>
+					</article>
+					<article class="style6 reveal">
+						<span class="image">
+							<img src="images/Marigold.jpg" alt="" />
+						</span>
+						<a href="Marigold.html">
+							<h2>Gemitir</h2>
+							<div class="content">
+								<p><strong>Nama Ilmiah: </strong>Tagetes Erecta L<br>
+								<strong>Ayurvedic: </strong>Zindu<br>
+								<strong>Bagian: </strong>Bunga, Daun</p>
+							</div> 
+						</a>
+					</article>
+					<article class="style1 reveal">
+						<span class="image">
+							<img src="images/Mint.jpg" alt="" />
+						</span>
+						<a href="Mint.html">
+							<h2>Daun mint</h2>
+							<div class="content">
+								<p><strong>Nama Ilmiah: </strong>Mentha<br>
+								<strong>Ayurvedic: </strong>Pudina<br>
+								<strong>Bagian: </strong>Daun</p>
+							</div> 
+						</a>
+					</article>
+					<article class="style3 reveal">
+						<span class="image">
+							<img src="images/pineapple.jpg" alt="" />
+						</span>
+						<a href="Pineapple.html">
+							<h2>Nanas</h2>
+							<div class="content">
+								<p><strong>Nama Ilmiah: </strong>Ananas comosus<br>
+								<strong>Ayurvedic: </strong>Anasam<br>
+								<strong>Bagian: </strong>Buah, Daun</p>
+							</div> 
+						</a>
+					</article>
+					<article class="style6 reveal">
+						<span class="image">
+							<img src="images/soursop.jpg" alt="" />
+						</span>
+						<a href="Soursop.html">
+							<h2>Sirsak</h2>
+							<div class="content">
+								<p><strong>Nama Ilmiah: </strong>Annona Muricata L<br>
+								<strong>Ayurvedic: </strong>Graviola/Shultramla<br>
+								<strong>Bagian: </strong>Daun, Buah</p>
+							</div> 
+						</a>
+					</article>
+					<article class="style3 reveal">
+						<span class="image">
+							<img src="images/Maja.jpg" alt="" />
+						</span>
+						<a href="Maja.html">
+							<h2>Majapahit</h2>
+							<div class="content">
+								<p><strong>Nama Ilmiah: </strong>Aegle marmelos<br>
+								<strong>Ayurvedic: </strong>Bilva/Bliwa<br>
+								<strong>Bagian: </strong>Biji</p>
+							</div> 
+						</a>
+					</article>
+					<article class="style1 reveal">
+						<span class="image">
+							<img src="images/Coconut.jpg" alt="" />
+						</span>
+						<a href="Coconut-Tree.html">
+							<h2>pohon kelapa</h2>
+							<div class="content">
+								<p><strong>Nama Ilmiah: </strong>Cocos Nucifera<br>
+								<strong>Ayurvedic: </strong>Narikela<br>
+								<strong>Bagian: </strong>Daun, Buah</p>
+							</div> 
+						</a>
+					</article>
+					<article class="style6 reveal">
+						<span class="image">
+							<img src="images/Tomato.jpg" alt="" />
+						</span>
+						<a href="Tomato-Tree.html">
+							<h2>Pohon tomat</h2>
+							<div class="content">
+								<p><strong>Nama Ilmiah: </strong>Solanum Lycopersicum<br>
+								<strong>Ayurvedic: </strong>Raktaphala<br>
+								<strong>Bagian: </strong>Daun, Batang</p>
+							</div> 
+						</a>
+					</article>
+
+				</section>
+
+				
+		
+
+			<section class="reveal" style="background-color: #f3f3f3; padding: 6em 0; border-radius: 30px; margin: 2em 0;">
+    <div class="inner">
+        <header style="text-align: center; margin-bottom: 4em;">
+            <h2 style="font-size: 2.5em;">Bagaimana Kami Menggunakan Tanaman Kami
+</h2>
+            <p>Integrasi keindahan alam Bali ke dalam setiap aspek pelayanan kami.</p>
+        </header>
+        
+        <div class="row">
+            <div class="col-6 col-12-medium" style="margin-bottom: 2em;">
+                <div class="feature-card">
+                    <span class="feature-icon">🍵</span>
+                    <h3>Welcome Drink & Tea</h3>
+                    <p>Tanaman seperti <strong>Lemongrass (serai)</strong> dan <strong>Butterfly Pea (kembang telang)</strong> kami petik langsung dari kebun untuk dijadikan minuman selamat datang yang segar bagi tamu yang baru tiba.</p>
+                </div>
+            </div>
+
+            <div class="col-6 col-12-medium" style="margin-bottom: 2em;">
+                <div class="feature-card">
+                    <span class="feature-icon">💆</span>
+                    <h3>Spa & Wellness</h3>
+                    <p>Ekstrak <strong>Aloe Vera (lidah buaya)</strong> dan bunga <strong>Frangipani (kamboja)</strong> digunakan dalam berbagai perawatan di Kapha Spa untuk memberikan efek relaksasi maksimal.</p>
+                </div>
+            </div>
+
+            <div class="col-6 col-12-medium" style="margin-bottom: 2em;">
+                <div class="feature-card">
+                    <span class="feature-icon">🙏</span>
+                    <h3>Persembahan Upacara</h3>
+                    <p>Setiap pagi, tim kami memetik bunga <strong>Marigold (gemitir)</strong> dan <strong>Jempiring</strong> untuk membuat <i>Canang Sari</i> sebagai bentuk syukur kami harian.</p>
+                </div>
+            </div>
+
+            <div class="col-6 col-12-medium" style="margin-bottom: 2em;">
+                <div class="feature-card">
+                    <span class="feature-icon">🍳</span>
+                    <h3>Bahan dapur</h3>
+                    <p>Bumbu dapur seperti <strong>Ginger (jahe)</strong> dan <strong>Lime (jeruk nipis)</strong> dipasok langsung dari kebun organik kami untuk menjamin kesegaran hidangan di restoran.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="faq-section reveal">
+    <div class="inner">
+        <header style="text-align: center; margin-bottom: 3em;">
+            <h2>Pertanyaan Umum</h2>
+            <p>Segala hal yang ingin Anda ketahui tentang ekosistem hijau di Wapa Di Ume.</p>
+        </header>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">Apakah semua tanaman di sini aman untuk anak-anak?</div>
+                <div class="faq-answer">
+                    <p>Ya, sebagian besar tanaman di area umum kami sangat aman. Untuk tanaman hias yang hanya untuk estetika, kami selalu memberi pembatas agar tidak terjangkau anak-anak secara langsung.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Bolehkah tamu meminta bibit atau benih tanaman?</div>
+                <div class="faq-answer">
+                    <p>Tentu saja! Kami sangat senang jika tamu ingin membawa pulang semangat hijau kami. Silakan hubungi tim Gardening kami untuk ketersediaan bibit tertentu.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Apakah semua tanaman di resort menggunakan pupuk kimia?</div>
+                <div class="faq-answer">
+                    <p>Tidak. Kami berkomitmen pada kelestarian alam dengan menggunakan 100% pupuk organik yang kami olah sendiri dari limbah dapur dan dedaunan kering di sekitar resort.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Kapan waktu terbaik untuk melihat bunga-bunga bermekaran?</div>
+                <div class="faq-answer">
+                    <p>Setiap pagi sekitar pukul 08:00 adalah waktu terbaik, di mana embun masih terlihat dan bunga-bunga seperti kamboja dan jempiring sedang mekar dengan sempurna.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="reveal" style="margin: 4em 0;">
+    <div class="inner">
+        <header>
+            <h2>Jadwal Pemeliharaan Kebun</h2>
+            <p>Rutinitas harian tim Gardening Wapa Di Ume untuk menjaga keasrian lingkungan resort.</p>
+        </header>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Waktu</th>
+                        <th>Aktivitas</th>
+                        <th>Area Kerja</th>
+                        <th>Metode</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>07:00 - 08:30</td>
+                        <td>Penyiraman Pagi</td>
+                        <td>Seluruh Area Resort</td>
+                        <td>Sistem irigasi manual dan sprinkler untuk area rumput.</td>
+                    </tr>
+                    <tr>
+                        <td>08:30 - 10:00</td>
+                        <td>Pembersihan & Pruning</td>
+                        <td>Lobby & Pool Side</td>
+                        <td>Pemangkasan daun kering agar tampilan area publik tetap estetik.</td>
+                    </tr>
+                    <tr>
+                        <td>10:00 - 12:00</td>
+                        <td>Pemupukan Berkala</td>
+                        <td>Kebun Organik</td>
+                        <td>Pemberian kompos cair organik buatan sendiri (setiap Selasa).</td>
+                    </tr>
+                    <tr>
+                        <td>14:00 - 16:00</td>
+                        <td>Pengendalian Hama</td>
+                        <td>Area Tanaman Hias</td>
+                        <td>Penyemprotan pestisida nabati (daun mimba) secara ramah lingkungan.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-4 col-12-small">
+                <h4>🛠️ Alat yang digunakan</h4>
+                <ul>
+                    <li>Pruning Shears (Gunting Galah)</li>
+                    <li>Organic Compost (Kompos Organik)</li>
+                    <li>Eco-friendly Sprayer</li>
+                </ul>
+            </div>
+            <div class="col-8 col-12-small">
+                <h4>💡 Catatan Pemeliharaan</h4>
+                <p>Kami menerapkan prinsip <strong>Zero Waste Gardening</strong>, di mana seluruh sampah daun yang dikumpulkan setiap pagi akan dicacah dan dijadikan pupuk kompos untuk digunakan kembali di bulan berikutnya.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<section>
+					<h2>Hubungi Kami</h2>
+					<form method="post" action="#">
+						<div class="fields">
+							<div class="field half">
+								<input type="text" name="name" id="name" placeholder="Name" />
+							</div>
+							<div class="field half">
+								<input type="email" name="email" id="email" placeholder="Email" />
+							</div>
+							<div class="field">
+								<textarea name="message" id="message" placeholder="Message"></textarea>
+							</div>
+						</div>
+						<ul class="actions">
+							<li><input type="submit" value="Send" class="primary" /></li>
+						</ul>
+					</form>
+				</section>
+				<section>
+					<h2>Ikuti Kami </h2>
+					<ul class="icons">
+						<li><a href="https://x.com/wapadiumeresort" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li><a href="https://web.facebook.com/wapadiumeubud" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li><a href="https://www.instagram.com/wapadiumeubud/" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li><a href="https://www.youtube.com/channel/UCwpbF3GIwdgp5LKjFyeAGQQ" class="icon brands style2 fa-youtube"><span class="label">Youtube</span></a>
+						</li>
+						<li><a href="https://api.whatsapp.com/send/?phone=628113998971&text&type=phone_number&app_absent=0" class="icon brands style2 fa-whatsapp"><span class="label">whatsapp</span></a>
+						</li>
+						
+						 <li>
+            <a href="https://www.tripadvisor.com/Hotel_Review-g297701-d309331-Reviews-Wapa_Di_Ume_Ubud-Ubud_Gianyar_Regency_Bali.html" class="icon brands style2">
+              <img src="images/boboboy.png"  style="width: 32px; height: auto; filter: grayscale(100%) brightness(0.5);">
+              <span class="label"></span>
+            </a>
+          </li>
+						<li><a href="tel:+62%20366%20543%207600" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
+						<li><a href="mailto:reservation@wapadiume.com " class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+				</section>
+				<ul class="copyright">
+					<li>&copy; Untitled. All rights reserved</li>
+					<li>WAPA DI UME UBUD: <a href="http://wapadiumeubud.com">WAPA DI UME UBUD</a></li>
+				</ul>
+			</div>
+		</footer>
+
+	</div>
+
+
+
+	<script>
+
+		
+    const searchTrigger = document.querySelector('.search-trigger');
+    const searchOverlay = document.getElementById('searchOverlay');
+    const closeSearch = document.getElementById('closeSearch');
+    const headerSearchInput = document.getElementById('headerSearchInput');
+
+    // Buka Overlay Pencarian
+    searchTrigger.addEventListener('click', () => {
+        searchOverlay.classList.add('active');
+        headerSearchInput.focus(); // Langsung arahkan kursor ke input
+    });
+
+    // Tutup Overlay Pencarian
+    closeSearch.addEventListener('click', () => {
+        searchOverlay.classList.remove('active');
+    });
+
+    // Fungsi Pencarian (Gunakan logika yang sama dengan input di body)
+    headerSearchInput.addEventListener('keyup', function() {
+        let filter = this.value.toLowerCase();
+        let articles = document.querySelectorAll('.tiles article');
+        let found = false;
+
+        articles.forEach(article => {
+            let title = article.querySelector('h2').innerText.toLowerCase();
+            if (title.includes(filter)) {
+                article.style.display = "";
+                found = true;
+            } else {
+                article.style.display = "none";
+            }
+        });
+
+        // Jika user tekan "Enter", otomatis tutup overlay agar bisa melihat hasil
+        if (event.key === "Enter") {
+            searchOverlay.classList.remove('active');
+            window.scrollTo({ top: document.querySelector('.tiles').offsetTop - 100, behavior: 'smooth' });
+        }
+    });
+
+    // Menutup overlay jika mengklik di luar area input
+    searchOverlay.addEventListener('click', (e) => {
+        if (e.target === searchOverlay) {
+            searchOverlay.classList.remove('active');
+        }
+    });
+
+
+		function showPopup() {
+			document.getElementById('popup').style.display = 'flex';
+		}
+
+		function closePopup() {
+			document.getElementById('popup').style.display = 'none';
+		}
+	</script>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	
+<script>
+    function reveal() {
+        // Mencari semua elemen yang punya class "reveal"
+        var reveals = document.querySelectorAll(".reveal");
+
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight; // Tinggi layar HP/Monitor
+            var elementTop = reveals[i].getBoundingClientRect().top; // Jarak elemen dari atas
+            var elementVisible = 150; // Animasi mulai jalan saat elemen berjarak 150px dari bawah layar
+
+            if (elementTop < windowHeight - elementVisible) {
+                // Jika sudah terlihat di layar, tambahkan class "active" (memicu CSS tadi)
+                reveals[i].classList.add("active");
+            } else {
+                // Opsional: Hapus class "active" jika ingin animasi berulang saat di-scroll ke atas lagi
+                reveals[i].classList.remove("active");
+            }
+        }
+    }
+
+    // Jalankan fungsi setiap kali layar di-scroll
+    window.addEventListener("scroll", reveal);
+
+    // Jalankan satu kali saat halaman pertama kali dibuka 
+    // (agar elemen yang sudah ada di layar atas langsung muncul)
+    reveal();
+
+	// Fungsi untuk klik FAQ
+document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+        const item = question.parentElement;
+        
+        // Tutup FAQ lain yang sedang terbuka (Optional)
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+            if (otherItem !== item) {
+                otherItem.classList.remove('active');
+            }
+        });
+
+        // Buka atau tutup yang diklik
+        item.classList.toggle('active');
+    });
+});
+</script>
+
+<script>
+    const darkModeBtn = document.getElementById('darkModeBtn');
+    const body = document.body;
+    const icon = darkModeBtn.querySelector('i');
+
+    // Cek apakah user sebelumnya sudah memilih mode gelap
+    if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark-mode');
+        icon.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    darkModeBtn.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+            icon.classList.replace('fa-moon', 'fa-sun'); // Ganti jadi ikon matahari
+        } else {
+            localStorage.setItem('theme', 'light');
+            icon.classList.replace('fa-sun', 'fa-moon'); // Ganti jadi ikon bulan
+        }
+    });
+</script>
+
+     <a href="#header" class="button primary icon solid fa-arrow-up" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; border-radius: 50%; width: 50px; height: 50px; padding: 0; display: flex; align-items: center; justify-content: center;"></a>
+</body>
+
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Contact Us - Wapa Plants</title>
+    <link rel="shortcut icon" href="images/fav.png" type="image/x-icon">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --primary-color: #f2849e;
+            --secondary-color: #7ecaf6;
+            --menu-icon-color: #585858; /* Warna ikon hamburger */
+        }
+
+        /* FIX: Ikon Hamburger yang Pasti Terlihat */
+        #header nav ul li a[href="#menu"] {
+            border: 0;
+            display: block;
+            height: 3em;
+            width: 3em;
+            position: relative;
+            text-indent: 3em;
+            overflow: hidden;
+            color: var(--menu-icon-color) !important;
+            background: transparent;
+        }
+
+        /* Membuat 3 garis hamburger menggunakan satu elemen dan box-shadow */
+        #header nav ul li a[href="#menu"]:before {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0.5em;
+            top: 1.4em;
+            width: 2em;
+            height: 2px;
+            background: var(--menu-icon-color) !important;
+            /* Garis atas dan bawah */
+            box-shadow: 0 -0.6em 0 0 var(--menu-icon-color), 0 0.6em 0 0 var(--menu-icon-color);
+            transition: all 0.2s ease-in-out;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        /* Mematikan elemen after agar tidak double atau menutupi */
+        #header nav ul li a[href="#menu"]:after {
+            display: none !important;
+        }
+
+        /* Layout Styles */
+        .contact-header {
+            text-align: center;
+            padding: 5em 0 3em;
+            background: linear-gradient(135deg, #fff5f7 0%, #eef9ff 100%);
+            border-radius: 0 0 50% 50% / 20px;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3em;
+            margin-top: -3em;
+        }
+
+        .contact-form-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2.5em;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .info-box {
+            background: white;
+            padding: 1.5em;
+            border-radius: 20px;
+            margin-bottom: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-left: 5px solid var(--primary-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .social-grid { display: flex; gap: 10px; margin-top: 1.5em; }
+        .social-btn { 
+            flex: 1; 
+            text-align: center; 
+            padding: 1em; 
+            border-radius: 12px; 
+            color: white !important; 
+            font-weight: bold; 
+            text-decoration: none; 
+        }
+        .ig { background: #E1306C; } .wa { background: #25D366; } .fb { background: #1877F2; }
+
+        @media screen and (max-width: 980px) {
+            .contact-wrapper { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body class="is-preload">
+
+    <div id="wrapper">
+        <header id="header">
+            <div class="inner">
+                <a href="index.html" class="logo">
+                    <span class="symbol"><img src="images/logo.svg" alt="" /></span>
+                    <span class="title">WAPA PLANTS</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="#menu" id="btnToggleMenu">Menu</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <nav id="menu">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="kategori.html">Plant Category</a></li>
+                <li><a href="kontak.html">Contact Us</a></li>
+                <li><a href="https://bitri.link/wapadiumeubud">Hotels Information</a></li>
+            </ul>
+        </nav>
+
+        <div id="main">
+            <div class="contact-header">
+                <h1>Hubungi kami!</h1>
+                <p>Ada pertanyaan tentang tanaman kami? Tim Gardening kami siap membantu Anda.</p>
+            </div>
+
+            <div class="inner">
+                <div class="contact-wrapper">
+                    <div class="contact-form-card">
+                        <h3>Kirim Pesan</h3>
+                        <form method="post" action="kirim_pesan.php">
+                            <div class="row gtr-uniform">
+                                <div class="col-12"><input type="text" name="name" placeholder="Nama Lengkap" required /></div>
+                                <div class="col-12"><input type="email" name="email" placeholder="Email" required /></div>
+                                <div class="col-12">
+                                    <select name="category" required>
+                                        <option value="">Pilih Subjek</option>
+                                        <option value="Tanya Tanaman">Tanya Tanaman</option>
+                                        <option value="Permintaan Bibit">Permintaan Bibit</option>
+                                        <option value="Garden Tour">Garden Tour</option>
+                                    </select>
+                                </div>
+                                <div class="col-12"><textarea name="message" placeholder="Tulis pesan Anda..." rows="6" required></textarea></div>
+                                <div class="col-12">
+                                    <input type="submit" value="Kirim Sekarang" class="primary" style="width: 100%; border-radius: 10px;" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="contact-info">
+                        <div class="info-box">
+                            <div style="font-size: 2em;">📍</div>
+                            <div>
+                                <h4>Alamat Kami</h4>
+                                <p>Jl. Suweta, Ubud, Gianyar, Bali 80571</p>
+                            </div>
+                        </div>
+                        <div class="info-box" style="border-left-color: var(--secondary-color);">
+                            <div style="font-size: 2em;">📞</div>
+                            <div>
+                                <h4>Telepon</h4>
+                                <p>+62 361 973 178</p>
+                            </div>
+                        </div>
+                        <div class="social-grid">
+                            <a href="#" class="social-btn ig">Instagram</a>
+                            <a href="#" class="social-btn wa">WhatsApp</a>
+                            <a href="#" class="social-btn fb">Facebook</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer id="footer">
+            <div class="inner">
+                <p style="text-align: center;">&copy; 2024 Wapa Di Ume Gardening Project.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var $menu = $('#menu');
+            var $body = $('body');
+
+            $('#btnToggleMenu').on('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $body.addClass('is-menu-visible');
+            });
+
+            $menu.on('click', 'a[href="#menu"]', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $body.removeClass('is-menu-visible');
+            });
+
+            $body.on('click', function() {
+                $body.removeClass('is-menu-visible');
+            });
+
+            $menu.on('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+
+        // SweetAlert
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('status') === 'success') {
+            Swal.fire({
+                title: 'Berhasil!',
+                text: 'Pesan Anda telah terkirim.',
+                icon: 'success',
+                confirmButtonColor: '#f2849e'
+            });
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    </script>
+</body>
+</html>
